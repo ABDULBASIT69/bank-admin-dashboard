@@ -84,6 +84,9 @@
 textarea:focus, input:focus{
   outline: none;
 }
+textarea {
+  resize: none;
+}
 .form button{
   background-color: var(--yellow);
   border-radius: 14px;
@@ -98,6 +101,24 @@ textarea:focus, input:focus{
   font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
+}
+
+@media screen and (max-width: 992px) {
+  .side-design{
+    display: none;
+  }
+  .form{
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .full-fields{
+    flex-direction: column;
+  }
+  .full-fields div{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 
