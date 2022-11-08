@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Regular.ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Medium.ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-SemiBold.ttf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins/Poppins-Bold.ttf');
+  font-weight: 700;
+}
+:root {
+  --heading-color: #034B5E;
+  --lightgray:#C4C4C4;
+  --gray:#919499;
+  --darkgray:#787878;
+  --yellow:#F8AD15;
+  --dashborad-yellow:#FCBA2D;
+  --small-heading:#298097;
+  --black:#474747;
+  --form-bg:linear-gradient(138.28deg, #02566B 24.16%, #267E92 101.67%);
+}
+.form-bg{
+  background : var(--form-bg);
+}
+.heading-color{
+  color:var(--heading-color)
+}
+.lightgray{
+  color: var(--lightgray);
+}
+.gray{
+  color: var(--gray);
+}
+.darkgray{
+  color: var(--darkgray);
+}
+.yellow{
+  color: var(--yellow);
+}
+.dashboard-yellow{
+  color:var(--dashborad-yellow);
+}
+.sub-heading{
+  color: var(--small-heading);
+}
+.black{
+  color: var(--black);
+}
+.form h1{
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 30px;
+}
+.form span{
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 15px;
+}
+.input-outline{
+  border: 1px solid var(--lightgray);
+  border-radius: 14px;
+}
+textarea:focus, input:focus{
+  outline: none;
+}
+.form button{
+  background-color: var(--yellow);
+  border-radius: 14px;
+}
+.side-design h1{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 36px;
+  max-width: 340px;
+}
+.side-design p{
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+}
+
+
