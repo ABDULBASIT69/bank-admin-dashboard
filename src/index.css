@@ -31,6 +31,7 @@
 }
 :root {
   --heading-color: #034B5E;
+  --offwhite:#F8F8F8;
   --lightgray:#C4C4C4;
   --gray:#919499;
   --darkgray:#787878;
@@ -38,6 +39,7 @@
   --dashborad-yellow:#FCBA2D;
   --small-heading:#298097;
   --black:#474747;
+  --mediam-gray:#98A0B2;
   --form-bg:linear-gradient(138.28deg, #02566B 24.16%, #267E92 101.67%);
 }
 .form-bg{
@@ -45,6 +47,9 @@
 }
 .heading-color{
   color:var(--heading-color)
+}
+.mediam-gray{
+  color: var(--mediam-gray);
 }
 .lightgray{
   color: var(--lightgray);
@@ -66,6 +71,9 @@
 }
 .black{
   color: var(--black);
+}
+.offwhite{
+  background-color: var(--offwhite);
 }
 .form h1{
   font-family: 'Poppins';
@@ -104,8 +112,117 @@ textarea {
 }
 .error-color{
   color: red;
+  font-size: 10px !important;
+  margin-bottom: 0px;
 }
-
+.divider{
+  margin: 10px auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.divider:before {
+  content: "";
+  display: block;
+  width: 300px;
+  height: 1px;
+  background: var(--gray);
+  left: 0;
+  top: 50%;
+  position: absolute;
+  z-index: -1;
+}
+.divider:after {
+  content: "";
+  display: block;
+  width: 300px;
+  height: 1px;
+  background: var(--gray);
+  right: 0;
+  top: 50%;
+  position: absolute;
+  z-index: -1;
+}
+.another-method{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 16px;
+}
+.signup{
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 14px;
+}
+.forget-password{
+  border-radius: 30px;
+  width: 640px;
+}
+.forget-password h1{
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 30px;
+}
+.message{
+  background-color:#298097;
+  opacity: 0.5;
+  border-radius: 50%;
+}
+.reset{
+  border: 1px solid var(--lightgray);
+  border-radius: 14px;
+}
+.reset h4{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 18px;
+}
+.reset p{
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--lightgray);
+}
+.email-bg{
+  background-color: #F5F7FB;
+  opacity: 0.5;
+  border: 1px solid var(--darkgray);
+}
+.actv:hover{
+  border-color: #034B5E;
+}
+.email-bg input{
+  background-color: #F5F7FB;
+}
+.cell{
+  border-radius: 50%;
+  background-color: #ebecf0;
+}
+.send-link {
+  background-color: var(--yellow);
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.general{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 14px;
+}
+.change-color:hover path,
+.change-color:hover span{
+  color: var(--dashborad-yellow);
+  fill: var(--dashborad-yellow);
+}
+.title h1{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 20px;
+}
+.title p{
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 14px;
+}
 @media screen and (max-width: 992px) {
   .side-design{
     display: none;
@@ -114,7 +231,7 @@ textarea {
     width: 100% !important;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 650px) {
   .full-fields{
     flex-direction: column;
   }
@@ -122,6 +239,13 @@ textarea {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+}
+  @media screen and (max-width: 480px) {
+    .container{
+      padding-left: 3rem !important;
+      padding-right: 3rem !important;
+    }
+   
 }
 
 
