@@ -122,7 +122,7 @@ function Dashboard() {
                         {activeTab==='adduser' && <AddUser />}
                         {activeTab==='profile' && <Profile />}
                         {activeTab==='ManageUsers' && <ManageUsers setActiveTab={setActiveTab}/>}
-                        {activeTab==='editUser' && <EditUser />}
+                        {activeTab==='editUser' && <EditUser setActiveTab={setActiveTab}/>}
                         
                     </div>
                 </div>

@@ -25,6 +25,10 @@ function ManageUsers(props) {
         console.log(response)
         getUsersList()
     }
+    const EditUser=(userid)=>{
+        props.setActiveTab('editUser')
+        localStorage.setItem('userid',userid)
+    }
 
     useEffect(() => {
         getUsersList()
@@ -63,7 +67,7 @@ function ManageUsers(props) {
 
                             {data.map((user) => (
 
-                                <div className='flex justify-between p-8'>
+                                <div className='flex justify-between px-8 pt-8'>
                                     <h6 className='user-list text-black'>{user?.name}</h6>
                                     <h6 className='user-list lightgray'>{user?.username}</h6>
                                     <h6 className='user-list text-black'>{user?.accountnumber}</h6>
@@ -71,7 +75,7 @@ function ManageUsers(props) {
                                     <h6 className='user-list text-black'>{user?.branch}</h6>
                                     <h6 className='user-list text-black'>{user?.swiftCode}</h6>
                                     <h6 className='user-list text-black flex'>
-                                        <div className='h-5 w-5 pr-1 cursor-pointer' onClick={() => props.setActiveTab('editUser')}><img src={editicon}></img></div>
+                                        <div className='h-5 w-5 pr-1 cursor-pointer' onClick={()=>EditUser(user.id)}><img src={editicon}></img></div>
                                         <div className='h-5 w-5 pl-1 cursor-pointer' onClick={() => deleteUser(user.id)} ><img src={deleteicon}></img></div>
                                     </h6>
                                 </div>

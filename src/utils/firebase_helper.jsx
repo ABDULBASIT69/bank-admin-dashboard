@@ -1,8 +1,16 @@
 import { db,auth } from '../firebaseConfig';
 import { getDocs,getDoc,collection,deleteDoc,updateDoc,doc } from 'firebase/firestore';
 
-export const getSingleDoc = async ()=>{
-
+export const getSingleUser = async ()=>{
+        try{
+            const id=localStorage.getItem('userid')
+            if (!id) return;
+            const docRef = doc(db, "add-user", id.toString());
+            const userData = await getDoc(docRef)
+            return userData.data();
+        }catch(err){
+            console.log("err:",err)
+        }
 }
 
 export const getAllUsers = async ()=>{
@@ -25,8 +33,8 @@ export const deleteDocument = async (id)=>{
 }
 
 
-
-export const updateDocument = async (id,data)=>{
+export const updateSingleUser = async (data)=>{
+    const id=localStorage.getItem('userid')
     const documentRef = doc(db,"add-user", id)
     return await updateDoc(documentRef,data )
 }
@@ -55,4 +63,7 @@ export const getCurrentUser = async()=>{
         console.log("err:",err)
     }
 }
+
+
+
 

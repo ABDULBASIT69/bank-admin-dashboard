@@ -1,10 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useForm } from 'react-hook-form'
 import notification from '../assets/images/Notification.png'
 import activeuser from '../assets/images/active-user.png'
-function EditUser() {
+import { getSingleUser, updateSingleUser } from '../utils/firebase_helper'
+function EditUser(props) {
     
-    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+    const { register, handleSubmit, watch,setValue, formState: { errors } } = useForm()
     const [fieldData, setFieldData] = useState({
         name:"",
         username:"",
@@ -14,9 +15,31 @@ function EditUser() {
         accountnumber:""
 
     });
-    const editUser =() =>{
-
+    const getUSerData= async ()=>{
+       const userData= await getSingleUser()
+       const{name,username,accountnumber,balance,branch,swiftCode}=userData
+       setValue('name', name)
+       setValue('userName', username)
+       setValue('accountNumber', accountnumber)
+       setValue('balance', balance)
+       setValue('branch', branch)
+       setValue('swiftCode',swiftCode)
     }
+    const updateUser = async (data) =>{
+        await updateSingleUser({
+            name:data.name,
+            username:data.userName,
+            accountnumber:data.accountNumber,
+            balance:data.balance,
+            branch:data.branch,
+            swiftCode:data.swiftCode
+        })
+        props.setActiveTab('ManageUsers')
+    }
+
+    useEffect(() => {
+        getUSerData();
+    }, [])
     return (
         <div>
             <div className='py-9 flex justify-between'>
@@ -31,7 +54,7 @@ function EditUser() {
             </div>
 
             <div className='bg-white px-9 rounded-2xl'>
-                <form onSubmit={handleSubmit(editUser)} className="form">
+                <form onSubmit={handleSubmit(updateUser)} className="form">
                     <div className="pt-5">
                         <span className="gray">Name <span className='text-red-600'>*</span></span>
                         <div className="my-4">
@@ -74,7 +97,7 @@ function EditUser() {
                             {errors.swiftCode && <span className='error-color'>Enter User's Swift Code</span>}
                         </div>
                     </div>
-                    <button type='submit' className="text-white w-full py-5 my-4"onClick={onClick}>Update User</button>
+                    <button type='submit' className="text-white w-full py-5 my-4">Update User</button>
                 </form>
             </div>
         </div>
