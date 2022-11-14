@@ -223,6 +223,12 @@ textarea {
   font-weight: 300;
   font-size: 14px;
 }
+.sidebar{
+  width: 230px;
+}
+.dashboard-content{
+  margin-left: 230px;
+}
 @media screen and (max-width: 992px) {
   .side-design{
     display: none;
@@ -239,13 +245,48 @@ textarea {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+  
 }
   @media screen and (max-width: 480px) {
     .container{
-      padding-left: 3rem !important;
-      padding-right: 3rem !important;
+      padding-left: 2rem !important;
+      padding-right: 2rem !important;
     }
    
 }
+@media screen and (max-width: 768px) {
+  .sidebar{
+    display: none;
+  }
+  .dashboard-content{
+    margin-left: 0px;
+  }
+  .togglebtn{
+    display: block !important;
+  }
+  .togglebar{
+    display: block !important;
+  }
+}
+
+.menubtn{
+  width: 35px;
+  height: 5px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+.allUsers h1{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 24px;
+}
+.user-list{
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 12px;
+}
+
+
 
 

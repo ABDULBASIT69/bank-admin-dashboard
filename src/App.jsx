@@ -17,7 +17,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/dashboard" element={<Private Component={Dashboard} />} />
-
+        
       </Routes>
     </BrowserRouter>
   )
