@@ -1,47 +1,56 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import notification from '../assets/images/Notification.png'
 import activeuser from '../assets/images/active-user.png'
 import { useForm } from 'react-hook-form'
 import { collection } from "firebase/firestore";
-import { db,auth } from '../firebaseConfig';
-import {getCurrentUser} from "../utils/firebase_helper"
+import { db, auth } from '../firebaseConfig';
+import { getCurrentUser, updateCurrentUser } from "../utils/firebase_helper"
 // import { applyActionCode, getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getDocs } from 'firebase/firestore';
 
 
 function Profile() {
-    const [fieldData, setFieldData] = useState("");
-    const { register, handleSubmit, watch, formState: { errors } } = useForm()
-    const userMail=localStorage.getItem('login')
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm()
+    const abc = async () => {
+        // const collec = collection(db,"user-registration");
+        // const userData = await getDocs(collec)
+        // const cityList = userData.docs.map(doc => doc.data());
+        // console.log('userdata',cityList[1].city)
+    }
 
-const abc = async()=>{
-    // const collec = collection(db,"user-registration");
-    // const userData = await getDocs(collec)
-    // const cityList = userData.docs.map(doc => doc.data());
-    // console.log('userdata',cityList[1].city)
-}
+    const updateUser = (data) => {
+        updateCurrentUser({
+            fullname: data.fullName,
+            email: data.email,
+            birthdate: data.birthDate,
+            phonenumber: data.phoneNumber,
+            province: data.province,
+            city: data.city,
+            fulladdress: data.fullAddress,
+            password: data.password,
+        })
+        curretUser();
+    }
 
 
-const curretUser = async ()=>{
-    const userData1 = await getCurrentUser()
-    const {fullname,email,birthdate,phonenumber,province,city,fulladdress,profileimage,password} = userData1
-    setFieldData({
-        fullname:fullname,
-        email:email,
-        birthdate:birthdate,
-        phonenumber:phonenumber,
-        province:province,
-        city:city,
-        fulladdress:fulladdress,
-        profileimage:profileimage,
-        password:password
-    })
-}
+    const curretUser = async () => {
+        const userData1 = await getCurrentUser()
+        const { fullname, email, birthdate, phonenumber, province, city, fulladdress, password } = userData1
 
-useEffect(()=>{
-    curretUser();
-}, [])
+        setValue('fullName', fullname)
+        setValue('email', email)
+        setValue('birthDate', birthdate)
+        setValue('phoneNumber', phonenumber)
+        setValue('province', province)
+        setValue('city', city)
+        setValue('fullAddress', fulladdress)
+        setValue('password', password)
+        setValue('confirmPassword', password)
+    }
 
+    useEffect(() => {
+        curretUser();
+    }, [])
 
     return (
         <div>
@@ -58,89 +67,84 @@ useEffect(()=>{
 
 
             <div className='bg-white px-9 rounded-2xl'>
-            <form className='form' onSubmit={handleSubmit()}>
-                        <div className="pt-5">
-                            <span className="gray">Full Name <span className='text-red-600'>*</span></span>
-                            <div className="my-4">
-                            <div className="input-outline py-5 px-7"><input type="text" name="fullname" id="fullname" value={fieldData.fullname} {...register('fullName',{required:true})} placeholder="Full Name" className="w-full" /></div>
+                <form className='form' onSubmit={handleSubmit(updateUser)}>
+                    <div className="pt-5">
+                        <span className="gray">Full Name <span className='text-red-600'>*</span></span>
+                        <div className="my-4">
+                            <div className="input-outline py-5 px-7"><input type="text" name="fullname" id="fullname"  {...register('fullName', { required: true })} placeholder="Full Name" className="w-full" /></div>
                             {errors.fullName && <span className='error-color'>Enter Your Full Name</span>}
-                            </div>
                         </div>
-                        <div>
-                            <span className="gray">Email Address <span className='text-red-600'>*</span></span>
-                            <div className="my-4">
-                            <div className="input-outline py-5 px-7"><input type="email" name="email" id="email" value={fieldData.email} {...register('email',{required:true})} placeholder="Email Address" className="w-full" /></div>
+                    </div>
+                    <div>
+                        <span className="gray">Email Address <span className='text-red-600'>*</span></span>
+                        <div className="my-4">
+                            <div className="input-outline py-5 px-7"><input type="email" name="email" id="email" {...register('email', { required: true })} placeholder="Email Address" className="w-full" /></div>
                             {errors.email && <span className='error-color'>Enter Your Email</span>}
-                            </div>
                         </div>
-                        <div className="full-fields flex justify-between">
-                            <div className='w-full mr-5'>
-                                <span className="gray">Birth Date <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="date" name="birthdate" id="birthdate" value={fieldData.birthdate} {...register('birthDate',{required:true})} placeholder="Birth Date" className="w-full" /></div>
+                    </div>
+                    <div className="full-fields flex justify-between">
+                        <div className='w-full mr-5'>
+                            <span className="gray">Birth Date <span className='text-red-600'>*</span></span>
+                            <div className="my-4">
+                                <div className="input-outline py-5 px-7"><input type="date" name="birthdate" id="birthdate" {...register('birthDate', { required: true })} placeholder="Birth Date" className="w-full" /></div>
                                 {errors.birthDate && <span className='error-color'>Enter Your Birth Date</span>}
-                                </div>
                             </div>
-                            <div className='w-full ml-5'>
-                                <span className="gray">Phone Number <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="number" name="phonenumber" id="phonenumber" value={fieldData.phonenumber} {...register('phoneNumber',{required:true})} placeholder="Phone Number" className="w-full"  /></div>
+                        </div>
+                        <div className='w-full ml-5'>
+                            <span className="gray">Phone Number <span className='text-red-600'>*</span></span>
+                            <div className="my-4">
+                                <div className="input-outline py-5 px-7"><input type="number" name="phonenumber" id="phonenumber" {...register('phoneNumber', { required: true })} placeholder="Phone Number" className="w-full" /></div>
                                 {errors.phoneNumber && <span className='error-color'>Enter Your Phone Number</span>}
-                                </div>
                             </div>
                         </div>
-                        <div className="full-fields flex justify-between">
-                            <div className='w-full mr-5'>
-                                <span className="gray">Province <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="text" name="province" id="province" value={fieldData.province} {...register('province',{required:true})} placeholder="Province" className="w-full"  /></div>
+                    </div>
+                    <div className="full-fields flex justify-between">
+                        <div className='w-full mr-5'>
+                            <span className="gray">Province <span className='text-red-600'>*</span></span>
+                            <div className="my-4">
+                                <div className="input-outline py-5 px-7"><input type="text" name="province" id="province" {...register('province', { required: true })} placeholder="Province" className="w-full" /></div>
                                 {errors.province && <span className='error-color'>Enter Your Province Name</span>}
-                                </div>
                             </div>
-                            <div className='w-full ml-5'>
-                                <span className="gray">City <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="text" name="city" id="city" value={fieldData.city} {...register('city',{required:true})} placeholder="City" className="w-full"  /></div>
+                        </div>
+                        <div className='w-full ml-5'>
+                            <span className="gray">City <span className='text-red-600'>*</span></span>
+                            <div className="my-4">
+                                <div className="input-outline py-5 px-7"><input type="text" name="city" id="city" {...register('city', { required: true })} placeholder="City" className="w-full" /></div>
                                 {errors.city && <span className='error-color'>Enter Your City Name</span>}
-                                </div>
                             </div>
                         </div>
-                        <div>
-                            <span className="gray">Full Address <span className='text-red-600'>*</span></span>
-                            <div className="my-4">
-                            <div className="input-outline py-5 px-7"><textarea name='fullAddress' id='fullAddress' value={fieldData.fulladdress} {...register('fullAddress',{required:true})} placeholder="Full Address" cols="12" rows="2" className="w-full"  /></div>
+                    </div>
+                    <div>
+                        <span className="gray">Full Address <span className='text-red-600'>*</span></span>
+                        <div className="my-4">
+                            <div className="input-outline py-5 px-7"><textarea name='fullAddress' id='fullAddress' {...register('fullAddress', { required: true })} placeholder="Full Address" cols="12" rows="2" className="w-full" /></div>
                             {errors.fullAddress && <span className='error-color'>Enter Your Full Address</span>}
-                            </div>
                         </div>
-                        <div>
-                            <span className="gray">Profile Picture <span className='text-red-600'>*</span></span>
+                    </div>
+                    <div className="full-fields flex justify-between">
+                        <div className='w-full mr-5'>
+                            <span className="gray">Password <span className='text-red-600'>*</span></span>
                             <div className="my-4">
-                            <div className="input-outline py-5 px-7"><input type="file" name="profileImage" id="profileImage"  {...register('profileImage',{required:true})} placeholder="profileImage" className="w-full"  /></div>
-                            {errors.profileImage && <span className='error-color'>Select Your Profile Image</span>}
-                            </div>
-                        </div>
-                        <div className="full-fields flex justify-between">
-                            <div className='w-full mr-5'>
-                                <span className="gray">Password <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="password" name="password" id="password" value={fieldData.password} {...register('password',{required:true})} placeholder="Password" className="w-full"  /></div>
+                                <div className="input-outline py-5 px-7"><input type="password" name="password" id="password" {...register('password', { required: true })} placeholder="Password" className="w-full" /></div>
                                 {errors.password && <span className='error-color'>Enter Your Password</span>}
-                                </div>
-                            </div>
-                            <div className='w-full ml-5'>
-                                <span className="gray">Confirm Password <span className='text-red-600'>*</span></span>
-                                <div className="my-4">
-                                <div className="input-outline py-5 px-7"><input type="password" name="confirmPassword" id="confirmPassword" value={fieldData.password} {...register('confirmPassword',{required:true,validate:(val)=>{
-                                    if(watch('password')!=val){
-                                        return "Your passwords do no match";
-                                    }
-                                }})} placeholder="Confirm Password" className="w-full" /></div>
-                                {errors.confirmPassword && <span className='error-color'>Enter Correct Password</span>}
-                                </div>
                             </div>
                         </div>
-                        <button type='submit' className="text-white w-full py-5 my-4">Update Profile</button>
-                    </form>
+                        <div className='w-full ml-5'>
+                            <span className="gray">Confirm Password <span className='text-red-600'>*</span></span>
+                            <div className="my-4">
+                                <div className="input-outline py-5 px-7"><input type="password" name="confirmPassword" id="confirmPassword" {...register('confirmPassword', {
+                                    required: true, validate: (val) => {
+                                        if (watch('password') != val) {
+                                            return "Your passwords do no match";
+                                        }
+                                    }
+                                })} placeholder="Confirm Password" className="w-full" /></div>
+                                {errors.confirmPassword && <span className='error-color'>Enter Correct Password</span>}
+                            </div>
+                        </div>
+                    </div>
+                    <button type='submit' className="text-white w-full py-5 my-4">Update Profile</button>
+                </form>
             </div>
         </div>
     )

@@ -77,7 +77,6 @@ function ManageUsers(props) {
                                 </div>
                             ))}
                         </div>
-
                     </div>
                 </div>
             </div>

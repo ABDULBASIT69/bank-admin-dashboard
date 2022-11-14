@@ -1,5 +1,5 @@
 import { db,auth } from '../firebaseConfig';
-import { getDocs,getDoc,collection,deleteDoc, query, where,doc, QuerySnapshot } from 'firebase/firestore';
+import { getDocs,getDoc,collection,deleteDoc,updateDoc,doc } from 'firebase/firestore';
 
 export const getSingleDoc = async ()=>{
 
@@ -29,6 +29,17 @@ export const deleteDocument = async (id)=>{
 export const updateDocument = async (id,data)=>{
     const documentRef = doc(db,"add-user", id)
     return await updateDoc(documentRef,data )
+}
+
+
+export const updateCurrentUser = async (data)=>{
+   try {
+    const { uid } = auth.currentUser;
+    const documentRef = doc(db,"user-registration", uid)
+    return await updateDoc(documentRef,data )
+   } catch (error) {
+    console.log(error)
+   }
 }
 
 
