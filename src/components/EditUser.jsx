@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useForm } from 'react-hook-form'
-import notification from '../assets/images/notification.png'
+import notification from '../assets/images/Notification.png'
 import activeuser from '../assets/images/active-user.png'
 function EditUser() {
     

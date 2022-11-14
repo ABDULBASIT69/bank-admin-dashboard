@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import notification from '../assets/images/notification.png'
+import notification from '../assets/images/Notification.png'
 import activeuser from '../assets/images/active-user.png'
 import { getAllUsers, deleteDocument } from '../utils/firebase_helper'
 import editicon from '../assets/images/edit.png'

@@ -1,5 +1,5 @@
 import React from 'react'
-import notification from '../assets/images/notification.png'
+import notification from '../assets/images/Notification.png'
 import activeuser from '../assets/images/active-user.png'
 function DashboardContent() {
     return (
