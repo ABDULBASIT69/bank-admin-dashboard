@@ -9,23 +9,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DataTable from 'react-data-table-component'
 import DashboardHeader from './DashboardHeader'
+import HashLoader from "react-spinners/HashLoader";
 function ManageUsers(props) {
     const customId = "custom-id-yes";
     const [data, setData] = useState([])
     const [search, setSearch] = useState('')
     const [filteredData, setFilteredData] = useState([])
+    const [loader, setLoader] = useState(false)
 
     const getUsersList = async () => {
         const users = await getAllUsers()
-        console.log("iiidddd:", users)
         setData(users)
         setFilteredData(users)
     }
 
     const deleteUser = async (id) => {
+        setLoader(true)
         const response = await deleteDocument(id)
         console.log(response)
-        getUsersList()
+        getUsersList().then(() => {
+            setLoader(false)
+        })
     }
     const EditUser = (userid) => {
         props.setActiveTab('editUser')
@@ -33,7 +37,10 @@ function ManageUsers(props) {
     }
 
     useEffect(() => {
-        getUsersList()
+        setLoader(true)
+        getUsersList().then(() => {
+            setLoader(false)
+        })
     }, [])
 
     // react-data-table-component columns
@@ -81,37 +88,48 @@ function ManageUsers(props) {
 
     return (
         <>
-            <ToastContainer />
-            <div>
+            {loader ?
+                <div className='flex justify-center items-center h-screen'>
+                    <HashLoader
+                        color={'#034B5E'}
+                        size={50}
+                    />
+                </div>
+                :
                 <div>
-                    <div className='py-9 flex justify-between'>
-                        <div className='title'>
-                            <h1 className='heading-color'>Manage Users</h1>
-                            <span className='lightgray'>Manage and organize your users</span>
-                        </div>
-                        {/* <DashboardHeader /> */}
-                    </div>
-                    <div className='allUsers bg-white min-h-screen rounded-2xl px-9'>
-                        <h1 className='sub-heading py-9'>User List</h1>
-                        <DataTable
-                            columns={columns}
-                            data={filteredData}
-                            pagination
-                            fixedHeader
-                            highlightOnHover
-                            subHeader
-                            subHeaderComponent={
-                                <input
-                                    type='text'
-                                    placeholder='Search Here'
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
+                    <ToastContainer />
+                    <div>
+                        <div>
+                            <div className='py-9 flex justify-between'>
+                                <div className='title'>
+                                    <h1 className='heading-color'>Manage Users</h1>
+                                    <span className='lightgray'>Manage and organize your users</span>
+                                </div>
+                                {/* <DashboardHeader /> */}
+                            </div>
+                            <div className='allUsers bg-white min-h-screen rounded-2xl px-9'>
+                                <h1 className='sub-heading py-9'>User List</h1>
+                                <DataTable
+                                    columns={columns}
+                                    data={filteredData}
+                                    pagination
+                                    fixedHeader
+                                    highlightOnHover
+                                    subHeader
+                                    subHeaderComponent={
+                                        <input
+                                            type='text'
+                                            placeholder='Search Here'
+                                            value={search}
+                                            onChange={(e) => setSearch(e.target.value)}
+                                        />
+                                    }
                                 />
-                            }
-                        />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </>
     )
 }
