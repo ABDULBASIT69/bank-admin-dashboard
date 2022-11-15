@@ -68,7 +68,7 @@ export default function Login() {
                 <div>
                     <ToastContainer />
                     <div className="form-bg w-full flex justify-between">
-                        <div className="form bg-white w-3/5 pt-40">
+                        <div className="login-form form bg-white w-3/5 pt-40">
                             <div className="container mx-auto px-28">
                                 <h1 className="heading-color">Hi, Welcome Back Fellas!</h1>
                                 <form action="" onSubmit={handleSubmit(login)}>

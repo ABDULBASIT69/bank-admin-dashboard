@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from "react-router-dom";
 
 function ForgetPassword() {
+    const navigate=useNavigate()
     const {register, handleSubmit, watch, formState: { errors }}=useForm()
     const customId = "custom-id-yes";
     function sendmail(data){
@@ -37,7 +38,7 @@ function ForgetPassword() {
     return (
         <>
         <ToastContainer />
-        <div className='offwhite py-32 flex justify-center'>
+        <div className='offwhite py-32 px-8 flex justify-center'>
             <div className='forget-password bg-white'>
                 <div className='container mx-auto px-12 pt-8 pb-14'>
                     <h1 className='heading-color  text-center'>Forgot Password</h1>

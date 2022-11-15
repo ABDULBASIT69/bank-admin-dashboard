@@ -100,19 +100,18 @@ function Dashboard() {
                 </div>
             </div> : null
             }
-
+            
             {/* DashBoard Contet */}
 
             <div className='container mx-auto px-9 pt-9'>
                 <div className='dashboard-content'>
-
                     {/* Toggle Button */}
-
                     <div className='togglebtn hidden' onClick={() => setShowToggleBar(true)}>
                         <div className='menubtn'></div>
                         <div className='menubtn'></div>
                         <div className='menubtn'></div>
                     </div>
+
                     <div>
                         {activeTab==='dashboardContent' && <DashboardContent />}
                         {activeTab==='adduser' && <AddUser />}
@@ -123,7 +122,6 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

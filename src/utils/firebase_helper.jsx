@@ -18,7 +18,6 @@ export const getAllUsers = async ()=>{
     const allDocumnets = await getDocs(collections)
     const resultArray = []
     const userList = allDocumnets.docs.map(doc => {
-        console.log("Data:",doc.data())
         return {id:doc.id,...doc.data()}
     });
     return userList;

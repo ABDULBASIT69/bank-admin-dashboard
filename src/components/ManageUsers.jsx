@@ -26,9 +26,9 @@ function ManageUsers(props) {
     const deleteUser = async (id) => {
         setLoader(true)
         const response = await deleteDocument(id)
-        console.log(response)
         getUsersList().then(() => {
             setLoader(false)
+            
         })
     }
     const EditUser = (userid) => {
