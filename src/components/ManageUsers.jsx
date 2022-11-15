@@ -7,17 +7,19 @@ import deleteicon from '../assets/images/delete.png'
 import EditUser from './EditUser'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DataTable from 'react-data-table-component'
+import DashboardHeader from './DashboardHeader'
 function ManageUsers(props) {
     const customId = "custom-id-yes";
     const [data, setData] = useState([])
-    // const [editView,setEditView]=useState(false)
-    // const [editData,setEditData]=useState()
+    const [search, setSearch] = useState('')
+    const [filteredData, setFilteredData] = useState([])
 
     const getUsersList = async () => {
         const users = await getAllUsers()
         console.log("iiidddd:", users)
         setData(users)
-        // console.log("iiidddd:",users[0].id)
+        setFilteredData(users)
     }
 
     const deleteUser = async (id) => {
@@ -25,17 +27,57 @@ function ManageUsers(props) {
         console.log(response)
         getUsersList()
     }
-    const EditUser=(userid)=>{
+    const EditUser = (userid) => {
         props.setActiveTab('editUser')
-        localStorage.setItem('userid',userid)
+        localStorage.setItem('userid', userid)
     }
 
     useEffect(() => {
         getUsersList()
     }, [])
 
+    // react-data-table-component columns
 
+    const columns = [
+        {
+            name: 'Name',
+            selector: (row) => row.name,
+            sortable: true
+        },
+        {
+            name: 'User Name',
+            selector: (row) => row.username,
+        },
+        {
+            name: 'Account Number',
+            selector: (row) => row.accountnumber,
+        },
+        {
+            name: 'Balance',
+            selector: (row) => row.balance,
+        },
+        {
+            name: 'Branch',
+            selector: (row) => row.branch,
+        },
+        {
+            name: 'Swift Code',
+            selector: (row) => row.swiftCode,
+        },
+        {
+            name: 'Action',
+            cell: (row) => <div className='flex'><div className='h-5 w-5 pr-1 cursor-pointer' onClick={() => EditUser(row.id)}><img src={editicon}></img></div><div className='h-5 w-5 pl-1 cursor-pointer' onClick={() => deleteUser(row.id)} ><img src={deleteicon}></img></div></div>,
+        }
+    ]
 
+    //react-data-table-component filtered data
+
+    useEffect(() => {
+        const result = data.filter(filterData => {
+            return filterData.name.toLowerCase().match(search.toLowerCase())
+        })
+        setFilteredData(result)
+    }, [search])
 
     return (
         <>
@@ -47,45 +89,30 @@ function ManageUsers(props) {
                             <h1 className='heading-color'>Manage Users</h1>
                             <span className='lightgray'>Manage and organize your users</span>
                         </div>
-                        <div className='flex items-center'>
-                            <div className='p-3 mr-3 rounded-full bg-white'><img src={notification} /></div>
-                            <div className='rounded-full'><img src={activeuser} /></div>
-                        </div>
+                        {/* <DashboardHeader /> */}
                     </div>
                     <div className='allUsers bg-white min-h-screen rounded-2xl px-9'>
                         <h1 className='sub-heading py-9'>User List</h1>
-                        <div className='sub-heading border rounded-2xl min-h-screen'>
-                            <div className=' flex justify-between p-8'>
-                                <h6 className='general'>Name</h6>
-                                <h6 className='general'>User Name</h6>
-                                <h6 className='general'>Account Number</h6>
-                                <h6 className='general'>Balance</h6>
-                                <h6 className='general'>Branch</h6>
-                                <h6 className='general'>Swift Code</h6>
-                                <h6 className='general'>Action</h6>
-                            </div>
-
-                            {data.map((user) => (
-
-                                <div className='flex justify-between px-8 pt-8'>
-                                    <h6 className='user-list text-black'>{user?.name}</h6>
-                                    <h6 className='user-list lightgray'>{user?.username}</h6>
-                                    <h6 className='user-list text-black'>{user?.accountnumber}</h6>
-                                    <h6 className='user-list text-black'>{user?.balance}</h6>
-                                    <h6 className='user-list text-black'>{user?.branch}</h6>
-                                    <h6 className='user-list text-black'>{user?.swiftCode}</h6>
-                                    <h6 className='user-list text-black flex'>
-                                        <div className='h-5 w-5 pr-1 cursor-pointer' onClick={()=>EditUser(user.id)}><img src={editicon}></img></div>
-                                        <div className='h-5 w-5 pl-1 cursor-pointer' onClick={() => deleteUser(user.id)} ><img src={deleteicon}></img></div>
-                                    </h6>
-                                </div>
-                            ))}
-                        </div>
+                        <DataTable
+                            columns={columns}
+                            data={filteredData}
+                            pagination
+                            fixedHeader
+                            highlightOnHover
+                            subHeader
+                            subHeaderComponent={
+                                <input
+                                    type='text'
+                                    placeholder='Search Here'
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                />
+                            }
+                        />
                     </div>
                 </div>
             </div>
         </>
     )
 }
-
 export default ManageUsers

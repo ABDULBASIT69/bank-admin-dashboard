@@ -49,7 +49,6 @@ export default function Login() {
                     theme: "colored",
                     })
             })
-
     }
 
     return (

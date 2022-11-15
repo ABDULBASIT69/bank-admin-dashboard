@@ -50,8 +50,6 @@ export const updateCurrentUser = async (data)=>{
    }
 }
 
-
-
 export const getCurrentUser = async()=>{
     try{
         const { uid } = auth.currentUser;

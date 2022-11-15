@@ -11,13 +11,12 @@ import EditUser from './EditUser'
 
 function Dashboard() {
     const navigate = useNavigate()
-    const [showToggleBar, setShowToggleBar] = useState(true)
+    const [showToggleBar, setShowToggleBar] = useState(false)
     const [activeTab,setActiveTab] = useState('dashboardContent')
     function logout() {
         localStorage.clear();
         navigate('/')
     }
-
 
     return (
         <div className='offwhite flex min-h-screen'>
@@ -62,7 +61,7 @@ function Dashboard() {
 
             {/* Toggle nav bar */}
 
-            {showToggleBar ? <div className='togglebar hidden h-screen fixed bg-white'>
+            {showToggleBar ? <div className='togglebar hidden h-screen fixed bg-white z-10'>
                 <div className='container mx-auto px-5'>
                     <div className='px-5 w-24 absolute right-0' onClick={() => setShowToggleBar(false)}><img src={cross} /></div>
                     <div className='pt-16 px-5'><img src={logo} /></div>
@@ -102,21 +101,18 @@ function Dashboard() {
             </div> : null
             }
 
-
-
-
-
             {/* DashBoard Contet */}
 
             <div className='container mx-auto px-9 pt-9'>
                 <div className='dashboard-content'>
+
                     {/* Toggle Button */}
+
                     <div className='togglebtn hidden' onClick={() => setShowToggleBar(true)}>
                         <div className='menubtn'></div>
                         <div className='menubtn'></div>
                         <div className='menubtn'></div>
                     </div>
-
                     <div>
                         {activeTab==='dashboardContent' && <DashboardContent />}
                         {activeTab==='adduser' && <AddUser />}

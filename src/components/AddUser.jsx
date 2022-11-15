@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { db } from '../firebaseConfig';
 import {collection,addDoc} from 'firebase/firestore'
+import DashboardHeader from './DashboardHeader';
 
 
 function AddUser() {
@@ -37,7 +38,6 @@ function AddUser() {
                 progress: undefined,
                 theme: "colored",
             })
-
         
         }).catch((err)=>{
             toast.error('Something went Wrong!',{
@@ -62,10 +62,7 @@ function AddUser() {
                     <h1 className='heading-color'>Add User</h1>
                     <span className='lightgray'>Add New User to Company</span>
                 </div>
-                <div className='flex items-center'>
-                    <div className='p-3 mr-3 rounded-full bg-white'><img src={notification} /></div>
-                    <div className='rounded-full'><img src={activeuser} /></div>
-                </div>
+                {/* <DashboardHeader /> */}
             </div>
 
             <div className='bg-white px-9 rounded-2xl'>
@@ -115,9 +112,6 @@ function AddUser() {
                     <button type='submit' className="text-white w-full py-5 my-4">Add User</button>
                 </form>
             </div>
-
-
-
         </div>
     </>
     )

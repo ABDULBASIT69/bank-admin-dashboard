@@ -16,18 +16,7 @@ function ForgetPassword() {
         data.preventDefault;
         sendPasswordResetEmail(auth,data.email)
         .then(()=>{
-            toast.success('Successfully Registered!',{
-                toastId: customId,
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            })
-            // navigate('/')
+            navigate('/')
         })
         .catch(err => {
             toast.error('User Does Not Exist!',{

@@ -48,37 +48,7 @@ export default function SignUp() {
                                 password: data.password,
                             });
                             navigate('/')
-
-
-
-
-
                         })
-                            // .then((res)=>{
-
-                            // if(res){
-                            //     const userAuthenticaion= createUserWithEmailAndPassword(
-                            //         auth,
-                            //         data.email,
-                            //         data.password
-                            //     )
-
-                            //     navigate('/')
-                            // }
-
-                            // toast.success('Successfully Registered!',{
-                            //                 toastId: customId,
-                            //                 position: "top-right",
-                            //                 autoClose: 3000,
-                            //                 hideProgressBar: false,
-                            //                 closeOnClick: true,
-                            //                 pauseOnHover: true,
-                            //                 draggable: true,
-                            //                 progress: undefined,
-                            //                 theme: "colored",
-                            //             })
-
-                            // })
                             .catch((err) => {
                                 console.log(err)
                                 toast.error('Something went Wrong!', {
