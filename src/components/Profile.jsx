@@ -148,7 +148,7 @@ function Profile() {
                                     <div className='w-full mr-5'>
                                         <span className="gray">Password <span className='text-red-600'>*</span></span>
                                         <div className="my-4">
-                                            <div className="input-outline py-5 px-7"><input type="password" name="password" id="password" {...register('password', { required: true })} placeholder="Password" className="w-full" /></div>
+                                            <div className="input-outline py-5 px-7"><input type="password" name="password" id="password" {...register('password', { required: true })} placeholder="Password" className="w-full" disabled/></div>
                                             {errors.password && <span className='error-color'>Enter Your Password</span>}
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@ function Profile() {
                                                         return "Your passwords do no match";
                                                     }
                                                 }
-                                            })} placeholder="Confirm Password" className="w-full" /></div>
+                                            })} placeholder="Confirm Password" className="w-full" disabled/></div>
                                             {errors.confirmPassword && <span className='error-color'>Enter Correct Password</span>}
                                         </div>
                                     </div>

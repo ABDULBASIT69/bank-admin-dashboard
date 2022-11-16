@@ -41,6 +41,7 @@ export default function Login() {
                 }
             })
             .catch(err => {
+                setLoader(false)
                 toast.error('Something went Wrong!', {
                     toastId: customId,
                     position: "top-right",

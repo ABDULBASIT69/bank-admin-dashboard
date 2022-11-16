@@ -56,7 +56,7 @@ export default function SignUp() {
                             })
                         })
                             .catch((err) => {
-                                console.log(err)
+                                setLoader(false)
                                 toast.error('Something went Wrong!', {
                                     toastId: customId,
                                     position: "top-right",
